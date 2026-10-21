@@ -1,0 +1,62 @@
+/* BXYZ:..:eliot@bosmanxyz.xyz:..:.www.bosmanxyz.xyz */
+/* nav-pill. ett band = ett element. storsta forst, minsta sist, sa varje
+   oskarpa kant klipps inat av bandet ovanpa. inga gradienter, ingen filter
+   pa hela stapeln. matt tagna ur figma 53:73 (stroke 24, sigma 6). */
+
+.pill {
+  --pill-storlek: var(--mark-size, 7.5rem);
+  --pill-halo: var(--field, var(--halo-kroma, #fff41f));
+  --pill-bloom: var(--kant, var(--bloom-kroma, #2b44a9));
+  --pill-halo-opak: 0.55;
+  --pill-skifte: var(--dur-3, 240ms);
+
+  position: relative;
+  display: block;
+  inline-size: var(--pill-storlek);
+  block-size: var(--pill-storlek);
+  overflow: visible;
+  isolation: isolate;
+}
+.mark.pill { position: fixed; }
+
+.pill__band {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  inline-size: var(--d, 100%);
+  block-size: var(--d, 100%);
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: var(--pill-farg, transparent);
+  box-sizing: border-box;
+  transition: background-color var(--pill-skifte) var(--ease, linear), border-color var(--pill-skifte) var(--ease, linear);
+  text-decoration: none;
+  pointer-events: none;
+}
+
+/* mjuka band ritas som ring, inte skiva: filtret far da falla av at bada
+   hallen och bandet blir en verklig radiell oskarpa istallet for en kant. */
+.pill__band[data-ring] {
+  background: none;
+  border: var(--kantbredd) solid var(--pill-farg, transparent);
+}
+.pill__band[data-mjuk] {
+  filter: blur(var(--mjuk));
+}
+.pill__band[data-klipp] { clip-path: circle(var(--klipp) at 50% 50%); }
+
+.pill__band[data-lag="halo"] {
+  --pill-farg: var(--pill-halo);
+  opacity: var(--pill-halo-opak);
+}
+.pill__band[data-lag="bloom"] { --pill-farg: var(--pill-bloom); }
+.pill__band[data-lag="kol"]   { --pill-farg: var(--rad-2, #161617); }
+.pill__band[data-lag="karna"] { --pill-farg: var(--rad-3, #cacbcb); }
+.pill__band[data-lag="dis"]   { --pill-farg: var(--rad-4, #d9d9d9); }
+.pill__band[data-lag="luft"]  { --pill-farg: var(--paper, #fff); }
+.pill__band[data-lag="ring"]  { --pill-farg: var(--rad-1, #969696); }
+
+.mark.pill:focus-visible {
+  outline: var(--stroke, 2px) solid var(--ink, #191818);
+  outline-offset: var(--baseline, 4px);
+}

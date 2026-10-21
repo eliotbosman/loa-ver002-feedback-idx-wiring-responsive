@@ -1,0 +1,60 @@
+/* BXYZ:..:eliot@bosmanxyz.xyz:..:.www.bosmanxyz.xyz */
+@layer dev {
+  :root {
+    --dev-kolumn: color-mix(in srgb, var(--rose) 28%, transparent);
+    --dev-rad: color-mix(in srgb, var(--violet) 55%, transparent);
+    --dev-baslinje: color-mix(in srgb, var(--violet) 18%, transparent);
+    --dev-huvud: color-mix(in srgb, var(--lime) 22%, transparent);
+    --dev-rest: color-mix(in srgb, var(--ochre) 30%, transparent);
+  }
+  .bxyz-dev-grid {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: var(--lager-dev);
+    overflow: hidden;
+    pointer-events: none;
+  }
+  html[data-dev-grid] .bxyz-dev-grid { display: block; }
+  .bxyz-dev-grid > * { position: absolute; inset-inline: 0; }
+  .bxyz-dev-grid__kolumner { inset-block: 0; grid-template-rows: 100%; grid-auto-rows: 0; }
+  .bxyz-dev-grid__kolumner > i { grid-column: auto; background: var(--dev-kolumn); }
+  .bxyz-dev-grid__baslinjer, .bxyz-dev-grid__rader { inset-block: 0; }
+  .bxyz-dev-grid__baslinjer { background: repeating-linear-gradient(to bottom, var(--dev-baslinje) 0 var(--stroke), transparent var(--stroke) var(--baseline)); }
+  .bxyz-dev-grid__rader { background: repeating-linear-gradient(to bottom, var(--dev-rad) 0 var(--stroke), transparent var(--stroke) var(--u)); }
+  .bxyz-dev-grid__huvud { inset-block-start: 0; block-size: var(--huvud); background: var(--dev-huvud); }
+  .bxyz-dev-grid__rest { inset-block: var(--falt-rader) 0; background: var(--dev-rest); }
+
+  .bxyz-dev-grid__reglage {
+    position: fixed;
+    inset-block-start: calc(var(--falt-rader) - var(--u) - var(--safe-b, 0rem));
+    inset-inline: 0;
+    z-index: calc(var(--lager-dev) + 1);
+    display: flex;
+    inline-size: max-content;
+    block-size: var(--u);
+    margin-inline: auto;
+    padding-block: var(--rad-inset);
+  }
+  .bxyz-dev-grid__reglage[hidden] { display: none; }
+  .bxyz-dev-grid__reglage button {
+    border: 0;
+    padding-inline: var(--gutter);
+    background: var(--ink);
+    color: var(--paper);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    cursor: pointer;
+  }
+  .bxyz-dev-grid__reglage button:first-child { border-start-start-radius: var(--lh-body); border-end-start-radius: var(--lh-body); }
+  .bxyz-dev-grid__reglage button:last-child { border-start-end-radius: var(--lh-body); border-end-end-radius: var(--lh-body); box-shadow: inset var(--stroke) 0 0 var(--grey-600); }
+  .bxyz-dev-grid__reglage button[aria-pressed="true"] { background: var(--violet); }
+
+  .bar__rut { display: none; position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+  html[data-dev-grid] .bar[data-open] .bar__rut { display: block; }
+  .bar__rut-rader, .bar__rut-bas, .bar__rut-kol { position: absolute; inset: 0; }
+  .bar__rut-rader { background: repeating-linear-gradient(to bottom, var(--dev-rad) 0 var(--stroke), transparent var(--stroke) var(--u)); }
+  .bar__rut-bas { background: repeating-linear-gradient(to bottom, var(--dev-baslinje) 0 var(--stroke), transparent var(--stroke) var(--baseline)); }
+  .bar__rut-kol { display: grid; grid-template-columns: var(--spar); column-gap: var(--gutter); padding-inline: var(--kant-v, var(--margin)) var(--kant-h, var(--margin)); }
+  .bar__rut-kol > i { min-inline-size: 0; background: var(--dev-kolumn); }
+}

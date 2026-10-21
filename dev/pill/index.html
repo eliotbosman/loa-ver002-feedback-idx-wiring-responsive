@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-satt="0">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>nav-pill — jamforelse</title>
+<link rel="stylesheet" href="../../css/pill.css">
+<style>
+  :root {
+    --u: 2.25rem;
+    --stroke: calc(var(--u) / 16);
+    --paper: #ffffff;
+    --ink: #191818;
+    --rad-1: #969696;
+    --rad-2: #161617;
+    --rad-3: #cacbcb;
+    --rad-4: #d9d9d9;
+    --halo-kroma: #fff41f;
+    --bloom-kroma: #2b44a9;
+    --dur-2: 160ms;
+    --ease: cubic-bezier(0.2, 0, 0, 1);
+    --mark-size: min(22rem, 40dvw);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-block-size: 100dvh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow-x: hidden;
+    align-items: center;
+    justify-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 0.6875rem/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: lowercase;
+  }
+  figure { margin: 0; display: grid; justify-items: center; gap: 0.75rem; }
+  figcaption { color: #6d6e70; }
+  .ref { inline-size: min(24rem, 44dvw); object-fit: contain; }
+  .reglage { grid-column: 1 / -1; display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+  .reglage button { border: 0; background: #e0e2e3; color: var(--ink); font: inherit; padding: 0.4rem 0.8rem; cursor: pointer; }
+  .reglage button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  body[data-grund] { background: #d8d8d6; }
+</style>
+</head>
+<body>
+<figure>
+  <img class="ref" alt="referens" src="figma-53-73.png">
+  <figcaption>figma 53:73</figcaption>
+</figure>
+<figure>
+  <nav class="pill" data-pill aria-label="nav-pill"></nav>
+  <figcaption>nav-pill</figcaption>
+</figure>
+<div class="reglage">
+  <button type="button" data-satt-knapp aria-pressed="false">grå-rotation</button>
+  <button type="button" data-grund-knapp aria-pressed="false">tonad botten</button>
+</div>
+<script src="../../js/pill.js"></script>
+<script>
+  var paletter = [
+    ['#fff41f', '#2b44a9'],
+    ['#f3b6cd', '#9c4a24'],
+    ['#c0e4e8', '#9f8d40']
+  ];
+  var n = 0;
+  document.querySelector('[data-satt-knapp]').addEventListener('click', function (e) {
+    n = (n + 1) % paletter.length;
+    document.documentElement.style.setProperty('--halo-kroma', paletter[n][0]);
+    document.documentElement.style.setProperty('--bloom-kroma', paletter[n][1]);
+    e.currentTarget.setAttribute('aria-pressed', String(n !== 0));
+  });
+  document.querySelector('[data-grund-knapp]').addEventListener('click', function (e) {
+    var pa = document.body.toggleAttribute('data-grund');
+    e.currentTarget.setAttribute('aria-pressed', String(pa));
+  });
+</script>
+</body>
+</html>

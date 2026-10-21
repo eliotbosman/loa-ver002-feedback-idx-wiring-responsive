@@ -1,0 +1,197 @@
+/* BXYZ:..:eliot@bosmanxyz.xyz:..:.www.bosmanxyz.xyz */
+@layer dev {
+  .bxyz-karta {
+    position: fixed;
+    inset-block-end: var(--safe-b, 0rem);
+    inset-inline-start: var(--safe-l, 0rem);
+    z-index: calc(var(--lager-dev) + 1);
+    display: grid;
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    pointer-events: none;
+  }
+  .bxyz-karta > * { pointer-events: auto; }
+
+  .bxyz-karta__reglage {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--stroke);
+    align-items: center;
+    order: 2;
+    margin: var(--gutter);
+    inline-size: max-content;
+    max-inline-size: calc(100dvw - var(--safe-l, 0rem) - var(--safe-r, 0rem) - var(--gutter));
+  }
+  .bxyz-karta__reglage button {
+    min-inline-size: var(--u);
+    block-size: var(--u);
+    padding-inline: var(--baseline);
+    border: var(--stroke) solid var(--ink);
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+    line-height: 1;
+    cursor: var(--pekare-lank);
+  }
+  .bxyz-karta__reglage button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .bxyz-karta__reglage [data-vidd="oppen"] { display: none; }
+  .bxyz-karta__hint { line-height: var(--u); padding-inline: var(--baseline); background: var(--paper); color: var(--ink); }
+  .bxyz-karta__sats { display: none; margin: 0; flex: 1 1 18rem; }
+
+  .bxyz-karta__panel { display: none; }
+  .bxyz-karta__varfor { display: none; }
+
+  html[data-dev-karta] .bxyz-karta {
+    inset: var(--safe-t, 0rem) var(--safe-r, 0rem) var(--safe-b, 0rem) var(--safe-l, 0rem);
+    grid-template-rows: auto minmax(0, 1fr);
+    background: color-mix(in srgb, var(--ink) 58%, transparent);
+    pointer-events: auto;
+  }
+  html[data-dev-karta] .bxyz-karta__reglage {
+    order: 0;
+    margin: 0;
+    inline-size: auto;
+    max-inline-size: none;
+    padding: var(--baseline) var(--gutter);
+    background: var(--ink);
+    color: var(--paper);
+  }
+  html[data-dev-karta] .bxyz-karta__reglage button {
+    background: transparent;
+    color: var(--paper);
+    border-color: var(--grey-600);
+  }
+  html[data-dev-karta] .bxyz-karta__reglage button[aria-pressed="true"] { background: var(--paper); color: var(--ink); }
+  html[data-dev-karta] .bxyz-karta__reglage [data-vidd="oppen"] { display: inline-flex; }
+  html[data-dev-karta] .bxyz-karta__reglage [data-vidd="oppen"][hidden] { display: none; }
+  html[data-dev-karta] .bxyz-karta__hint { display: none; }
+  html[data-dev-karta] .bxyz-karta__sats { display: block; color: var(--paper); }
+
+  html[data-dev-karta] .bxyz-karta__panel {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-block-size: 0;
+    background: transparent;
+  }
+
+  .bxyz-karta__rot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--stroke);
+    padding: var(--baseline) var(--gutter);
+    background: color-mix(in srgb, var(--ink) 82%, transparent);
+    color: var(--paper);
+  }
+  .bxyz-karta__rotlage[data-tom] { opacity: 0.4; }
+
+  .bxyz-karta__yta {
+    position: relative;
+    min-block-size: 0;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none;
+  }
+  .bxyz-karta__yta[data-dra] { cursor: grabbing; }
+
+  .bxyz-karta__plan {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    transform-origin: 0 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--paper) 16%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--paper) 16%, transparent) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .bxyz-karta__trad { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+  .bxyz-karta__trad path { fill: none; stroke: var(--paper); stroke-width: 1.5; }
+
+  .bxyz-karta__box {
+    position: absolute;
+    pointer-events: auto;
+    box-sizing: border-box;
+    display: grid;
+    align-content: start;
+    gap: var(--stroke);
+    inline-size: 220px;
+    padding: var(--baseline);
+    overflow: auto;
+    background: var(--paper);
+    color: var(--ink);
+    border-block-start: calc(var(--stroke) * 4) solid var(--lime);
+    box-shadow: var(--stroke) 0 0 var(--ink);
+  }
+  .bxyz-karta__box[data-niva="makro"] { block-size: 124px; }
+  .bxyz-karta__box[data-niva="mikro"] { block-size: 168px; }
+  .bxyz-karta__box:hover { outline: var(--stroke) solid var(--lime); }
+
+  .bxyz-karta__namn {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-weight: 700;
+    line-height: var(--lh-body);
+    text-align: start;
+    cursor: var(--pekare-lank);
+  }
+  .bxyz-karta__mening { margin: 0; color: var(--grey-600); line-height: var(--lh-body); }
+
+  .bxyz-karta__in {
+    justify-self: start;
+    padding-inline: var(--baseline);
+    border: var(--stroke) solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    font: inherit;
+    line-height: var(--u);
+    cursor: var(--pekare-lank);
+  }
+
+  .bxyz-karta__krok {
+    justify-self: start;
+    padding-inline: var(--stroke);
+    background: var(--grey-100);
+    line-height: var(--lh-body);
+  }
+  .bxyz-karta__krok[data-fel="orphan"] { background: var(--rosa); font-weight: 700; }
+
+  .bxyz-karta__lagen { display: flex; flex-wrap: wrap; gap: var(--stroke); }
+  .bxyz-karta__chip {
+    padding-inline: var(--stroke);
+    border: var(--stroke) solid var(--grey-200);
+    background: var(--paper);
+    color: var(--grey-400);
+    font: inherit;
+    line-height: var(--lh-body);
+    cursor: var(--pekare-lank);
+  }
+  .bxyz-karta__chip[aria-pressed="true"] { border-color: var(--ink); background: var(--lime); color: var(--ink); font-weight: 700; }
+
+  .bxyz-karta__varfor {
+    position: absolute;
+    inset-inline-end: var(--gutter);
+    inset-block-start: calc(var(--u) * 4);
+    z-index: 2;
+    inline-size: min(26rem, calc(100% - var(--gutter) * 2));
+    max-block-size: min(70dvh, 36rem);
+    overflow: auto;
+    padding: var(--gutter);
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: var(--stroke) 0 0 var(--ink);
+  }
+  html[data-karta-varfor] .bxyz-karta__varfor { display: grid; gap: var(--baseline); align-content: start; }
+  .bxyz-karta__varfor-rubrik { margin: 0; font: inherit; font-weight: 700; line-height: var(--u); }
+  .bxyz-karta__varfor-rad { margin: 0; line-height: var(--lh-body); }
+  .bxyz-karta__varfor-rad strong { font-weight: 700; }
+
+  html[data-dev-karta] [data-karta-lyft] {
+    outline: calc(var(--stroke) * 3) solid var(--lime);
+    outline-offset: var(--stroke);
+  }
+}
