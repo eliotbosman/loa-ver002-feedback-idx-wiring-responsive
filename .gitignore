@@ -1,7 +1,0 @@
-.claude/
-.cursor/
-.vscode/
-__pycache__/
-*.pyc
-dev/audit/
-dev/review/ut/rapport.md
