@@ -23,8 +23,6 @@ KRAV = (
     ('js/pill.js', 'bygg'),
     ('js/pill.js', 'Fjader.prototype.steg'),
     ('js/ringar.js', 'rita'),
-    ('playground/navigator/navigator.js', 'mat'),
-    ('playground/navigator/navigator.js', 'lagg'),
 )
 
 
